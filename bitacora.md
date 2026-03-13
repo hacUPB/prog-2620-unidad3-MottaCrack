@@ -27,10 +27,10 @@ Esta sección clasifica los valores fijos que rigen la física del vuelo (los cu
 
 | Nombre sugerido | Tipo | Descripción y justificación |
 | :--- | :--- | :--- |
-| CONSUMO_BASE | Constante | Consumo estándar de la aeronave en kg/km. *(Pendiente por investigar).* |
+| CONSUMO_BASE | Constante | Consumo estándar de la aeronave en kg/km. 3.2kg/km |
 | FACTOR_CONTRA | Constante | Porcentaje de aumento de consumo por viento en contra. *(Pendiente por investigar).* |
 | FACTOR_FAVOR | Constante | Porcentaje de reducción de consumo por viento a favor. *(Pendiente por investigar).* |
-| RESERVA_LEGAL | Constante | Límite mínimo legal de combustible en kg para emergencias. *(Pendiente por investigar).* |
+| RESERVA_LEGAL | Constante | Límite mínimo legal de combustible en kg para emergencias. 1000kg |
 | capacidad_inicial | Variable | Cantidad inicial de combustible en el tanque al momento del despegue (kg). |
 | combustible_actual | Variable | **Variable de control de seguridad:** Se actualiza restando el consumo en cada tramo. Si rompe el límite de reserva, detiene la ejecución. |
 | tramo_actual | Variable | **Variable de control de bucle:** Contador que va del 1 al 5. Finaliza el programa cuando llega a 5 tramos completados. |
@@ -53,15 +53,7 @@ El algoritmo se divide en tres bloques principales:
 ## 2. Pseudocódigo
 
 ```text
-INICIO DEL PROGRAMA
-
-  // Bloque 1: Inicialización de variables y constantes
-  Definir CONSUMO_BASE, FACTOR_CONTRA, FACTOR_FAVOR, RESERVA_LEGAL
-  Imprimir "Ingrese la cantidad inicial de combustible (kg): "
-  Leer capacidad_inicial
-  combustible_actual = capacidad_inicial
-
-  // Bloque 2: Función de cálculo de consumo
+ // Bloque 2: Función de cálculo de consumo
   FUNCIÓN calcular_consumo_tramo(distancia, viento):
     consumo_estandar = distancia * CONSUMO_BASE
     
@@ -77,6 +69,14 @@ INICIO DEL PROGRAMA
     
     RETORNAR consumo_final
   FIN FUNCIÓN
+
+INICIO
+
+  // Bloque 1: Inicialización de variables y constantes
+  Definir CONSUMO_BASE, FACTOR_CONTRA, FACTOR_FAVOR, RESERVA_LEGAL
+  Imprimir "Ingrese la cantidad inicial de combustible (kg): "
+  Leer capacidad_inicial
+  combustible_actual = capacidad_inicial
 
   // Bloque 3: Bucle principal de la ruta
   PARA tramo_actual DESDE 1 HASTA 5 CON PASO 1:
@@ -109,4 +109,4 @@ INICIO DEL PROGRAMA
 
   Imprimir "Simulación de vuelo finalizada."
 
-FIN DEL PROGRAMA
+FIN
